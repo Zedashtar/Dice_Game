@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: so_Face_Sword
   m_EditorClassIdentifier: 
   faceType: 2
-  color: {fileID: 0}
+  faceIcon: {fileID: 6371920771885271083, guid: fa65762692e0b1d439afcbfd9f3c12e3, type: 3}
   icon: {fileID: 21300000, guid: a3cbc11a6c147e6458c7402e6a942851, type: 3}

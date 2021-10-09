@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: so_Face_Shield
   m_EditorClassIdentifier: 
   faceType: 1
-  color: {fileID: 0}
+  faceIcon: {fileID: -4624105994463601106, guid: fa65762692e0b1d439afcbfd9f3c12e3, type: 3}
   icon: {fileID: 21300000, guid: b6138b4c1885bfa4888965de543c898c, type: 3}

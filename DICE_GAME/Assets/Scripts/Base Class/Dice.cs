@@ -1,16 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Dice : MonoBehaviour
 {
 
-    List<GameObject> go_faceList = new List<GameObject>();
 
-    [HideInInspector]
-    public List<DiceFace_SO> so_faceList = new List<DiceFace_SO>();
-    Rigidbody rb;
+    [HideInInspector] public List<DiceFace_SO> so_faceList = new List<DiceFace_SO>();
+    [HideInInspector] public List<GameObject> go_faceList = new List<GameObject>();
 
+    /*[HideInInspector]*/ public List<DiceFace_SO> tooltipList = new List<DiceFace_SO>();
 
     [Header("Dice Colors")]
     public Material m_red;
@@ -26,46 +26,6 @@ public class Dice : MonoBehaviour
     [Space]
     public DiceFace_SO activeFace;
 
-
-
-
-    private void Awake()
-    {
-        GameObject[] faceGO = GameObject.FindGameObjectsWithTag("Dice Face");
-        foreach (GameObject face in faceGO)
-        {
-            if (face.transform.IsChildOf(this.transform))
-                go_faceList.Add(face);
-            
-        }
-        so_faceList.AddRange(new DiceFace_SO[6]);
-
-        rb = GetComponent<Rigidbody>();
-    }
-
-    private void Start()
-    {
-        InitDice();
-        
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            activeFace = null;
-            float dirX = Random.Range(0, 500);
-            float dirY = Random.Range(0, 500);
-            float dirZ = Random.Range(0, 500);
-            transform.position = new Vector3(0, 6, 0);
-            transform.rotation = Quaternion.identity;
-            rb.AddForce(transform.up * 500);
-            rb.AddTorque(dirX, dirY, dirZ);
-
-
-
-        }
-    }
 
 
     public void InitDice()
@@ -85,10 +45,15 @@ public class Dice : MonoBehaviour
             }
         }
 
+        tooltipList.Clear();
 
         switch (dice_SO.diceType)
         {
             case Dice_SO.DiceType.Double:
+
+                tooltipList.AddRange(Enumerable.Repeat(dice_SO.faces[0], 3));
+                tooltipList.AddRange(Enumerable.Repeat(dice_SO.faces[1], 3));
+
                 for (int i = 0; i < go_faceList.Count; i++)
                 {
                     if (i < 3)
@@ -109,6 +74,11 @@ public class Dice : MonoBehaviour
                 break;
 
             case Dice_SO.DiceType.Triple:
+
+                tooltipList.AddRange(Enumerable.Repeat(dice_SO.faces[0], 2));
+                tooltipList.AddRange(Enumerable.Repeat(dice_SO.faces[1], 2));
+                tooltipList.AddRange(Enumerable.Repeat(dice_SO.faces[2], 2));
+
                 for (int i = 0; i < go_faceList.Count; i++)
                 {
                     if (i == 0 || i == 5)
@@ -148,11 +118,11 @@ public class Dice : MonoBehaviour
         }
     }
 
-    Material MaterialSelect(DiceFace_SO.FaceType type)
+    Material MaterialSelect(DiceFace_SO.FaceType _type)
     {
         Material mat;
 
-        switch (type)
+        switch (_type)
         {
             case DiceFace_SO.FaceType.Blue:
                 mat = m_blue;

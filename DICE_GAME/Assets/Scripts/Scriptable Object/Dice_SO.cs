@@ -1,19 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEditor;
 
 
 [CreateAssetMenu(fileName = "so_Dice_New", menuName = "Dice/New Dice")]
 public class Dice_SO : ScriptableObject
 {
+    public string diceName;
     public enum DiceType { Double, Triple };
 
     public DiceType diceType;
     
 
-    public List<DiceFace_SO> faces;
+    public List<DiceFace_SO> faces = new List<DiceFace_SO>();
 
     public void UpdateInspector()
     {
@@ -48,8 +48,6 @@ public class Dice_SO : ScriptableObject
     [CustomEditor(typeof(Dice_SO))]
     public class DiceEditor : Editor
     {
-
-        //public DiceType diceType;
 
         public override void OnInspectorGUI()
         {
