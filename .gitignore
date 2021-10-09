@@ -1,0 +1,14 @@
+
+Builds/
+DICE_GAME/Library/
+DICE_GAME/.vs/
+DICE_GAME/.vscode/
+DICE_GAME/Logs/
+DICE_GAME/obj/
+DICE_GAME/Temp/
+DICE_GAME/Builds/
+PROJET_01/UserSettings/
+
+*.csproj
+*.sln
+
